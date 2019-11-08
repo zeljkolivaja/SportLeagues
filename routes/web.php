@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 
 Route::resource('leagues', 'LeaguesController');
 Route::resource('games', 'GamesController');
@@ -26,8 +28,8 @@ Route::get('/yourLeagues', 'LeaguesController@showLeagues');
 
 Route::post('/leagues/{league}/teams', 'TeamsController@store');
 
- 
- 
+
+
 
 
 

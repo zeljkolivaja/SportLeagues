@@ -2,9 +2,7 @@
 
 
 @section('content')
-
-
-<form class="form-inline" action="/leagues" method="post">
+ <form class="form-inline" action="/leagues" method="post">
     @csrf
     <div class="form-group mb-2">
         <label for="inputPassword2" class="sr-only">Insert League Name</label>

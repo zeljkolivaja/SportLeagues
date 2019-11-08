@@ -24,16 +24,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link {{ Request::path() === "home" ? "active" : "" }}" href="/home">Home
+                        <span class="sr-only">(current)</span></a>
 
 
                     @if(Auth::user())
-                    <a class="nav-item nav-link" href="/leagues">Your Leagues</a>
-                    <a class="nav-item nav-link" href="/leagues/create">Create new League</a>
+                    <a class="nav-item nav-link {{ Request::path() === "leagues" ? "active" : "" }}"
+                        href="/leagues">Your Leagues</a>
+                    <a class="nav-item nav-link {{ Request::path() === "leagues/create" ? "active" : "" }}"
+                        href="/leagues/create">Create new League</a>
                     <a class="nav-item nav-link" href="/logout">Logout</a>
                     @else
-                    <a class="nav-item nav-link" href="/login">Login</a>
-                    <a class="nav-item nav-link" href="/register">Register</a>
+                    <a class="nav-item nav-link {{ Request::path() === "login" ? "active" : "" }}"
+                        href="/login">Login</a>
+                    <a class="nav-item nav-link {{ Request::path() === "register" ? "active" : "" }}"
+                        href="/register">Register</a>
 
                     @endif
 
@@ -43,6 +48,7 @@
     </div>
     </nav>
     <div>
+
 
 
 

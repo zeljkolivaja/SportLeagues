@@ -24,7 +24,6 @@ Route::resource('games', 'GamesController');
 
 Route::resource('teams', 'TeamsController');
 
-Route::get('/yourLeagues', 'LeaguesController@showLeagues');
 
 Route::post('/leagues/{league}/teams', 'TeamsController@store');
 

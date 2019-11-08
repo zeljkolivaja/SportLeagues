@@ -25,11 +25,11 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/leagues">Your Leagues</a>
-                    <a class="nav-item nav-link" href="/leagues/create">Create new League</a>
 
 
                     @if(Auth::user())
+                    <a class="nav-item nav-link" href="/leagues">Your Leagues</a>
+                    <a class="nav-item nav-link" href="/leagues/create">Create new League</a>
                     <a class="nav-item nav-link" href="/logout">Logout</a>
                     @else
                     <a class="nav-item nav-link" href="/login">Login</a>

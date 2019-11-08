@@ -67,7 +67,7 @@ class GamesController extends Controller
 
             // json_encode($match);
 
-            // return $match;
+            return "2";
             return view('games.show', compact('match'));
         }
 

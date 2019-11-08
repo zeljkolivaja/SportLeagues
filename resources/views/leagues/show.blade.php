@@ -26,7 +26,8 @@
 
 <b>Table</b>
 <br />
-<table>
+<table class="table">
+        <thead>
     <tr>
         <th>Name</th>
         <th>GP</th>
@@ -37,10 +38,12 @@
         <th>Goals R</th>
         <th>Points</th>
     </tr>
+</thead>
 
+<tbody>
 
     @foreach ($sorted as $team)
-    <tr align="right">
+    <tr>
         <td>
             {{$team->teamName}}
         </td>
@@ -66,6 +69,8 @@
             {{$team->totalPoints}}
     </tr>
     @endforeach
+</tbody>
+
 </table>
 
 
@@ -73,15 +78,19 @@
 Matches:
 
 
-<div class="cell large-12">
+<div>
     <p class="text-center" id="raspored"> <b>Raspored odigravanja utakmica:</b> </p>
     <hr>
 </div>
 <br />
 
+<div class="container">
+<div class="row">
+
+
 @if(isset($schedule))
 @foreach($schedule as $round => $games)
-<div class="cell large-3 small-6">
+<div class="col-4">
 
     <b> Kolo: {{$round+1}} <BR> </b>
 
@@ -115,7 +124,8 @@ Matches:
 
 @endforeach
 
-
+</div>
+</div>
 
 
 {{-- <div id="remote"></div> --}}
@@ -190,7 +200,11 @@ Matches:
         data :data,
         success:function(data){
            submit.attr("value", "Submitted");
-        //    document.getElementById("remote").innerHTML = data;
+           if (data=="2") {
+            alert("The game has already been submited, to enter result again delete it");
+            }
+        // document.getElementById("remote").innerHTML = data;
+
 
 
 

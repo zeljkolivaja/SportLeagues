@@ -21,6 +21,9 @@ class CreateGamesTable extends Migration
             $table->unsignedBigInteger('league');
             $table->integer('homeTeamGoals');
             $table->integer('awayTeamGoals');
+            $table->string('awayTeamName');
+            $table->string('homeTeamName');
+
 
 
             $table->foreign('homeTeam')->references('id')->on('teams')->onDelete('cascade');

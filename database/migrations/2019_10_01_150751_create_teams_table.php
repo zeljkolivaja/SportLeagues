@@ -17,13 +17,13 @@ class CreateTeamsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('teamName');
-            $table->integer('totalPoints');
-            $table->integer('totalGoalsScored');
-            $table->integer('totalGoalsConceded');
-            $table->integer('totalGamesPlayed');
-            $table->integer('totalWins');
-            $table->integer('totalLosses');
-            $table->integer('totalDraws');
+            $table->integer('totalPoints')->default('0');
+            $table->integer('totalGoalsScored')->default('0');
+            $table->integer('totalGoalsConceded')->default('0');
+            $table->integer('totalGamesPlayed')->default('0');
+            $table->integer('totalWins')->default('0');
+            $table->integer('totalLosses')->default('0');
+            $table->integer('totalDraws')->default('0');
             $table->unsignedBigInteger('league_id');
 
 

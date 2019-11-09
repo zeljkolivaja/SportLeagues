@@ -17,4 +17,10 @@ class Game extends Model
     {
         $this->create($game);
     }
+
+
+    public function showGames($league)
+    {
+        return $this->where('league', $league)->get();
+    }
 }

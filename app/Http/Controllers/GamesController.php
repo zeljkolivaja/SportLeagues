@@ -15,9 +15,13 @@ class GamesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Game $game,Request $request)
     {
-        //
+        $league = $request->input('league');
+        $games = $game->showGames($league);
+        return view('games.index', compact('games'));
+
+        dd($games);
     }
 
     /**
@@ -71,7 +75,8 @@ class GamesController extends Controller
             return view('games.show', compact('match'));
         }
 
-
+        $game['homeTeamName'] = $homeTeamName;
+        $game['awayTeamName'] = $awayTeamName;
         $game['homeTeam'] = $homeTeam;
         $game['awayTeam'] = $awayTeam;
 
@@ -164,6 +169,6 @@ class GamesController extends Controller
 
 
 
-        return redirect('/leagues');
+        return back();
     }
 }

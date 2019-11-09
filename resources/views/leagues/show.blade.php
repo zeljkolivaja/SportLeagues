@@ -2,24 +2,35 @@
 
 @section('content')
 
+<br/>
+<form action="/games" method="get">
+    @csrf
+    <input type="hidden" name="league" value="{{$league->id}}" readonly />
+    <input class="btn btn-primary" type="submit" value="Menage Games">
+</form>
+<br/>
+
+<form action="/leagues/{{$league->id}}/edit" method="get">
+    @csrf
+    <input class="btn btn-primary" type="submit" value="Edit League and Teams">
+ </form>
+
 
 <b>League name</b> : {{$league->leagueName}}
 </br>
 <b>League description</b> : {{$league->description}}
 </br>
 
-<form action="/leagues/{{$league->id}}/edit" method="get">
-    @csrf
-    <input type="submit" value="Edit League and Teams">
-</form>
 
 
 
+<br/>
 <form action="/leagues/{{$league->id}}/teams" method="post">
     @csrf
     <input type="text" name="teamName" placeholder='Team Name' required>
-    <input type="submit" value="Create Team">
-</form>
+    <input class="btn btn-primary" type="submit" value="Create Team">
+
+ </form>
 
 
 

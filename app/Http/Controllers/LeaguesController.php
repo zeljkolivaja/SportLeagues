@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\League;
+use App\Team;
 use Illuminate\Http\Request;
 
 class LeaguesController extends Controller
@@ -25,6 +26,15 @@ class LeaguesController extends Controller
         // dd($leagues);
 
         return view('leagues.index', compact('leagues'));
+    }
+
+    public function reset(Team $teams,Request $request)
+    {
+        $league = $request->input('league');
+
+        $teams->reset($league);
+        return back();
+
     }
 
     /**
@@ -164,6 +174,6 @@ class LeaguesController extends Controller
         $league->delete();
         session()->flash('message', 'Your League has been deleted');
 
-        return redirect('/leagues');
+        return redirect('/home');
     }
 }

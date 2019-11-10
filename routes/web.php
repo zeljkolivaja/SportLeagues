@@ -27,6 +27,9 @@ Route::resource('teams', 'TeamsController');
 
 Route::post('/leagues/{league}/teams', 'TeamsController@store');
 
+Route::post('/leagueReset', 'LeaguesController@reset');
+
+
 
 
 

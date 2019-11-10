@@ -3,6 +3,7 @@
 namespace App;
 
 use DB;
+use App\Game;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -77,16 +78,16 @@ class Team extends Model
             'totalGoalsConceded' => DB::raw('totalGoalsConceded +' . (int)$homeTeamGoals),
             'totalGamesPlayed' => DB::raw('totalGamesPlayed + 1'),
             'totalDraws' => DB::raw('totalDraws + 1')
-    
+
         ]);
-    
+
         $this->where('id', $homeTeam)->where('league_id', $league)->update([
                 'totalPoints' => DB::raw('totalPoints + 1'),
                 'totalGoalsScored' => DB::raw('totalGoalsScored +' . (int)$homeTeamGoals),
                 'totalGoalsConceded' => DB::raw('totalGoalsConceded +' . (int)$awayTeamGoals),
                 'totalGamesPlayed' => DB::raw('totalGamesPlayed + 1'),
                 'totalDraws' => DB::raw('totalDraws + 1')
-    
+
             ]);
     }
 
@@ -123,26 +124,36 @@ class Team extends Model
         $league = $game->league;
         $homeTeamGoals =  $game->homeTeamGoals;
         $awayTeamGoals = $game->awayTeamGoals;
-    
+
         $this->where('id', $awayTeam)->where('league_id', $league)->update([
                 'totalPoints' => DB::raw('totalPoints - 3'),
                 'totalGoalsScored' => DB::raw('totalGoalsScored -' . (int)$awayTeamGoals),
                 'totalGoalsConceded' => DB::raw('totalGoalsConceded -' . (int)$homeTeamGoals),
                 'totalGamesPlayed' => DB::raw('totalGamesPlayed - 1'),
                 'totalWins' => DB::raw('totalWins - 1')
-    
+
             ]);
-    
+
         $this->where('id', $homeTeam)->where('league_id', $league)->update([
                 'totalGoalsScored' => DB::raw('totalGoalsScored -' . (int)$homeTeamGoals),
                 'totalGoalsConceded' => DB::raw('totalGoalsConceded -' . (int)$awayTeamGoals),
                 'totalGamesPlayed' => DB::raw('totalGamesPlayed - 1'),
                 'totalLosses' => DB::raw('totalLosses - 1')
-    
+
 
 
 
             ]);
+    }
+
+
+    public function reset($league)
+    {
+         $this->where('league_id', $league)->update(['totalPoints' =>  0, 'totalGoalsScored'=> 0, 'totalGoalsConceded' => 0, 'totalGamesPlayed' => 0,
+         'totalWins' => 0, 'totalLosses'=> 0, 'totalDraws' => 0]);
+         $games = new Game;
+         $games->where('league', $league)->delete();
+
     }
 
 
@@ -155,25 +166,25 @@ class Team extends Model
         $league = $game->league;
         $homeTeamGoals =  $game->homeTeamGoals;
         $awayTeamGoals = $game->awayTeamGoals;
-        
+
         $this->where('id', $awayTeam)->where('league_id', $league)->update([
                     'totalPoints' => DB::raw('totalPoints - 1'),
                     'totalGoalsScored' => DB::raw('totalGoalsScored -' . (int)$awayTeamGoals),
                     'totalGoalsConceded' => DB::raw('totalGoalsConceded -' . (int)$homeTeamGoals),
                     'totalGamesPlayed' => DB::raw('totalGamesPlayed - 1'),
                     'totalDraws' => DB::raw('totalDraws - 1')
-        
+
                 ]);
-        
+
         $this->where('id', $homeTeam)->where('league_id', $league)->update([
                     'totalPoints' => DB::raw('totalPoints - 1'),
                     'totalGoalsScored' => DB::raw('totalGoalsScored -' . (int)$homeTeamGoals),
                     'totalGoalsConceded' => DB::raw('totalGoalsConceded -' . (int)$awayTeamGoals),
                     'totalGamesPlayed' => DB::raw('totalGamesPlayed - 1'),
                     'totalDraws' => DB::raw('totalDraws - 1')
-        
-    
-    
+
+
+
                 ]);
     }
 }

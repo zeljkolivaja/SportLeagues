@@ -2,18 +2,21 @@
 
 @section('content')
 
-<br/>
+<br />
 <form action="/games" method="get">
     @csrf
     <input type="hidden" name="league" value="{{$league->id}}" readonly />
     <input class="btn btn-primary" type="submit" value="Menage Games">
 </form>
-<br/>
 
-<form action="/leagues/{{$league->id}}/edit" method="get">
+<form method="post" action="/leagues/{{$league->id}}">
     @csrf
-    <input class="btn btn-primary" type="submit" value="Edit League and Teams">
- </form>
+    {{ method_field("delete") }}
+    <input class="btn btn-danger" type="submit" value="Delete League">
+</form>
+
+
+
 
 
 <b>League name</b> : {{$league->leagueName}}
@@ -21,66 +24,74 @@
 <b>League description</b> : {{$league->description}}
 </br>
 
+<form action="/leagues/{{$league->id}}/edit" method="get">
+    @csrf
+    <input class="btn btn-primary" type="submit" value="Edit League and Teams">
+</form>
 
 
-
-<br/>
+<br />
 <form action="/leagues/{{$league->id}}/teams" method="post">
     @csrf
     <input type="text" name="teamName" placeholder='Team Name' required>
     <input class="btn btn-primary" type="submit" value="Create Team">
 
- </form>
+</form>
 
 
+<form action="/leagueReset" method="post">
+    @csrf
+    <input type=text name="league" readonly id="" value="{{$league->id}}" hidden>
+    <input class="btn btn-primary" type="submit" value="Reset League">
+</form>
 
 
 <b>Table</b>
 <br />
 <table class="table">
-        <thead>
-    <tr>
-        <th>Name</th>
-        <th>GP</th>
-        <th>Wins</th>
-        <th>Losses</th>
-        <th>Draws</th>
-        <th>Goals S</th>
-        <th>Goals R</th>
-        <th>Points</th>
-    </tr>
-</thead>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>GP</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Draws</th>
+            <th>Goals S</th>
+            <th>Goals R</th>
+            <th>Points</th>
+        </tr>
+    </thead>
 
-<tbody>
+    <tbody>
 
-    @foreach ($sorted as $team)
-    <tr>
-        <td>
-            {{$team->teamName}}
-        </td>
-        <td>
-            {{$team->totalGamesPlayed}}
-        </td>
-        <td>
-            {{$team->totalWins}}
-        </td>
-        <td>
-            {{$team->totalLosses}}
-        </td>
-        <td>
-            {{$team->totalDraws}}
-        </td>
-        <td>
-            {{$team->totalGoalsScored}}
-        </td>
-        <td>
-            {{$team->totalGoalsConceded}}
-        </td>
-        <td>
-            {{$team->totalPoints}}
-    </tr>
-    @endforeach
-</tbody>
+        @foreach ($sorted as $team)
+        <tr>
+            <td>
+                {{$team->teamName}}
+            </td>
+            <td>
+                {{$team->totalGamesPlayed}}
+            </td>
+            <td>
+                {{$team->totalWins}}
+            </td>
+            <td>
+                {{$team->totalLosses}}
+            </td>
+            <td>
+                {{$team->totalDraws}}
+            </td>
+            <td>
+                {{$team->totalGoalsScored}}
+            </td>
+            <td>
+                {{$team->totalGoalsConceded}}
+            </td>
+            <td>
+                {{$team->totalPoints}}
+        </tr>
+        @endforeach
+    </tbody>
 
 </table>
 
@@ -96,46 +107,46 @@ Matches:
 <br />
 
 <div class="container">
-<div class="row">
+    <div class="row">
 
 
-@if(isset($schedule))
-@foreach($schedule as $round => $games)
-<div class="col-4">
+        @if(isset($schedule))
+        @foreach($schedule as $round => $games)
+        <div class="col-4">
 
-    <b> Kolo: {{$round+1}} <BR> </b>
+            <b> Round: {{$round+1}} <BR> </b>
 
-    @foreach($games as $team)
-    @if($team["Home"]=="slobodan" or $team["Away"]=="slobodan")
+            @foreach($games as $team)
+            @if($team["Home"]=="slobodan" or $team["Away"]=="slobodan")
 
-    @if($team["Home"]!=="slobodan")
+            @if($team["Home"]!=="slobodan")
 
-    <b>{{$team["Home"]}} preskace ovo kolo</b> <BR>
-    @endif
-
-
-    @if($team["Away"]!=="slobodan")
-
-    <b> {{ $team["Away"]}} preskace ovo kolo</b> <BR>
-    @endif
+            <b>{{$team["Home"]}} preskace ovo kolo</b> <BR>
+            @endif
 
 
-    @continue;
-    @endif
+            @if($team["Away"]!=="slobodan")
 
-    {{ $team["Home"]}} vs {{$team["Away"]}} <BR>
-
-
+            <b> {{ $team["Away"]}} preskace ovo kolo</b> <BR>
+            @endif
 
 
-    @endforeach
-    <br>
-</div>
+            @continue;
+            @endif
+
+            {{ $team["Home"]}} vs {{$team["Away"]}} <BR>
 
 
-@endforeach
 
-</div>
+
+            @endforeach
+            <br>
+        </div>
+
+
+        @endforeach
+
+    </div>
 </div>
 
 
@@ -146,7 +157,7 @@ Matches:
 @foreach($schedule as $round => $games)
 <div class="cell large-3 small-6">
 
-    <b> Kolo: {{$round+1}} <BR> </b>
+    <b> Round: {{$round+1}} <BR> </b>
 
     @foreach($games as $team)
 

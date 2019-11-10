@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Team;
+
 use DB;
 
 use Illuminate\Http\Request;
@@ -106,6 +107,7 @@ class GamesController extends Controller
             'awayTeamGoals' => ['required', 'Numeric']
         ]);
     }
+
 
 
     /**

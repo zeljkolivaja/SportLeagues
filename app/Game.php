@@ -21,6 +21,7 @@ class Game extends Model
 
     public function showGames($league)
     {
+        // dd($this->where('league', $league)->get());
         return $this->where('league', $league)->get();
     }
 }

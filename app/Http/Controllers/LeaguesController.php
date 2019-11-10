@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\League;
 use App\Team;
+use App\Game;
 use Illuminate\Http\Request;
 
 class LeaguesController extends Controller
@@ -125,9 +126,11 @@ class LeaguesController extends Controller
               ->orderBy('total', 'DESC')
               ->orderBy('totalGoalsScored', 'DESC')
               ->get();
+        $league_id=$league->id;
 
-
-        return view('leagues.show', compact('sorted', 'league', 'schedule'));
+        $games  = new Game;
+        $matches = $games->showGames($league_id);
+        return view('leagues.show', compact('sorted', 'league', 'schedule', 'games', 'matches'));
     }
 
 

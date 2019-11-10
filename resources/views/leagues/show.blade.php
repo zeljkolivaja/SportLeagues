@@ -1,3 +1,7 @@
+
+{{ \App\Game::where('awayTeamName','asd')->where('homeTeamName','aaaaaa ')->pluck('awayTeamGoals') }}
+
+
 @extends('layout')
 
 @section('content')
@@ -15,6 +19,9 @@
     <input class="btn btn-danger" type="submit" value="Delete League">
 </form>
 
+
+
+branko
 
 
 
@@ -153,7 +160,6 @@ Matches:
 {{-- <div id="remote"></div> --}}
 
 
-
 @foreach($schedule as $round => $games)
 <div class="cell large-3 small-6">
 
@@ -165,20 +171,21 @@ Matches:
     @continue
     @endif
 
-    <form action="/games" method="post" class="gamesForm">
+      <form action="/games" method="post" class="gamesForm">
 
         <input type=text name="homeTeam" readonly id="" value="{{$team["Home"]}}">
         vs
         <input type=text name="awayTeam" readonly id="" value="{{$team["Away"]}}">
-        <input type="number" name="homeTeamGoals" value="0">
-        <input type="number" name="awayTeamGoals" id="" value="0">
+        <input type="number" name="homeTeamGoals" value="{{\App\Game::where('awayTeamName',$team["Away"])->where('homeTeamName',$team["Home"])->value('homeTeamGoals')}}">
+        <input type="number" name="awayTeamGoals" id="" value="{{\App\Game::where('awayTeamName',$team["Away"])->where('homeTeamName',$team["Home"])->value('awayTeamGoals')}}">
         <input type="hidden" name="league" value="{{$league->id}}" readonly />
         <input type="submit" value="SUBMIT RESULT">
     </form>
 
 
     @endforeach
-    <br>
+
+     <br>
 </div>
 
 @endforeach
@@ -221,7 +228,7 @@ Matches:
         url : url,
         data :data,
         success:function(data){
-           submit.attr("value", "Submitted");
+        //    submit.attr("value", "Submitted");
            if (data=="2") {
             alert("The game has already been submited, to enter result again delete it");
             }
@@ -231,15 +238,15 @@ Matches:
 
 
           },
-        beforeSend: function(){
-           submit.attr("value", "Loading...");
-           submit.prop("disabled", true);
-        },
-        error: function() {
-            submit.attr("value", submitOriginalText);
-            submit.prop("disabled", false);
-           // show error to end user
-        }
+        // beforeSend: function(){
+        //    submit.attr("value", "Loading...");
+        //    submit.prop("disabled", true);
+        // },
+        // error: function() {
+        //     submit.attr("value", submitOriginalText);
+        //     submit.prop("disabled", false);
+        //    // show error to end user
+        // }
     })
 })
 </script>

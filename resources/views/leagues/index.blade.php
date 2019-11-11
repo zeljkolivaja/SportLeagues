@@ -15,7 +15,7 @@
 
 @endforeach --}}
 
-
+<br/>
 <div class="row">
 
 @foreach ($leagues as $league)

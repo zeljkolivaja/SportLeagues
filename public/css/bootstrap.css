@@ -355,6 +355,10 @@ template {
   display: none;
 }
 
+.custom {
+    width: 170px !important;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -583,6 +587,9 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+.custom {
+    margin-bottom: 5px;
 }
 
 .row {

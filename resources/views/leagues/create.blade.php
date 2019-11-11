@@ -2,6 +2,7 @@
 
 
 @section('content')
+<br/>
  <form class="form-inline" action="/leagues" method="post">
     @csrf
     <div class="form-group mb-2">

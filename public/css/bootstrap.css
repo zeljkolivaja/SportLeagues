@@ -355,9 +355,7 @@ template {
   display: none;
 }
 
-.custom {
-    width: 170px !important;
-}
+
 
 [hidden] {
   display: none !important;
@@ -588,10 +586,15 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-.custom {
-    margin-bottom: 5px;
-}
 
+.hide {
+    display: none;
+ }
+
+.custom {
+
+    margin: 0px;
+}
 .row {
   display: -ms-flexbox;
   display: flex;

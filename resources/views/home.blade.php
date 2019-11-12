@@ -21,5 +21,5 @@
     </div>
 </div> --}}
 
-Welcome
+Hello {{Auth::user()->name}}
 @endsection

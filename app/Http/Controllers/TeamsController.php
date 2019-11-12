@@ -14,6 +14,14 @@ class TeamsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+
     public function index(Team $team, League $league)
     {
         $team = $league->teams;
@@ -68,8 +76,7 @@ class TeamsController extends Controller
      */
     public function edit(Team $team, League $league)
     {
-        $this->authorize('update', $league);
-
+        $this->authorize('update', $team);
         return view('teams.edit', compact('team'));
     }
 

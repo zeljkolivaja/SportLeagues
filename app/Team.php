@@ -19,6 +19,8 @@ class Team extends Model
         return $this->belongsTo(League::class);
     }
 
+
+
     public function games()
     {
         return $this->hasMany(Game::class, 'homeTeam', 'awayTeam');
@@ -149,11 +151,10 @@ class Team extends Model
 
     public function reset($league)
     {
-         $this->where('league_id', $league)->update(['totalPoints' =>  0, 'totalGoalsScored'=> 0, 'totalGoalsConceded' => 0, 'totalGamesPlayed' => 0,
+        $this->where('league_id', $league)->update(['totalPoints' =>  0, 'totalGoalsScored'=> 0, 'totalGoalsConceded' => 0, 'totalGamesPlayed' => 0,
          'totalWins' => 0, 'totalLosses'=> 0, 'totalDraws' => 0]);
-         $games = new Game;
-         $games->where('league', $league)->delete();
-
+        $games = new Game;
+        $games->where('league', $league)->delete();
     }
 
 

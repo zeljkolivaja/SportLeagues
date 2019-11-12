@@ -15,40 +15,51 @@
     </div>
 </div>
 
-<div class="row">
 
-    <div class="col-12 d-flex justify-content-center custom">
+
+<div class="container">
+
+    <div class="row">
+
+      <div class="col-sm">
         <form action="/leagues/{{$league->id}}/edit" method="get">
             @csrf
-            <input class="btn btn-primary " type="submit" value="Edit League and Teams">
+            <input class="btn btn-primary" type="submit" value="Edit League and Teams">
         </form>
-    </div>
 
-    <div class="col-12 d-flex justify-content-center custom">
+      </div>
+      <div class="col-sm">
         <form action="/games" method="get">
             @csrf
-            <input type="hidden" name="league" value="{{$league->id}}" readonly />
-            <input class="btn btn-primary " type="submit" value="Menage Games">
+            <input type="text" class="hide" name="league" value="{{$league->id}}" readonly />
+            <input class="btn btn-primary" type="submit" value="Menage Games">
         </form>
-    </div>
+      </div>
+      <div class="col-sm">
 
-    <div class="col-12 d-flex justify-content-center custom">
         <form action="/leagueReset" method="post">
             @csrf
-            <input type=text name="league" readonly value="{{$league->id}}" hidden>
+            <input type=text class="hide" name="league" readonly value="{{$league->id}}">
             <input class="btn btn-primary" type="submit" value="Reset League">
         </form>
-    </div>
-
-    <div class="col-12 d-flex justify-content-center custom">
+      </div>
+      <div class="col-sm">
         <form method="post" action="/leagues/{{$league->id}}">
             @csrf
             {{ method_field("delete") }}
             <input class="btn btn-danger " type="submit" value="Delete League">
         </form>
+      </div>
     </div>
+  </div>
 
-    <div class="col-12 d-flex justify-content-center">
+
+
+
+<div class="row">
+
+
+    <div class="col-sm">
 
         <form action="/leagues/{{$league->id}}/teams" method="post">
             @csrf

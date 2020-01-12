@@ -8,4 +8,4 @@ se ažurira tablica poretka.
 
 Neke od mogućnosti aplikacije pogledajte u GIF.u
 
-![](SL.gif)
+![](SL2.gif)

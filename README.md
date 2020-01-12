@@ -5,3 +5,7 @@ Cilj aplikacije je pojednostaviti kreiranje sportskih natjecanja: korisnicima je
 kreirati natjecanje i dodati natjecatelje, a aplikacija zatim automatski određuje raspored odigravanje
 susreta te generira forme za unos rezultata pojedinih susreta. Na temelju unesenih rezultata automatski
 se ažurira tablica poretka.
+
+Neke od mogućnosti aplikacije pogledajte u GIF.u
+
+![](SL.gif)

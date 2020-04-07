@@ -20,7 +20,10 @@ class TeamPolicy
      */
     public function update(User $user, Team $team)
     {
-        $owner= $team->select('owner_id')->join('leagues', 'leagues.id', '=', 'teams.league_id')->where('leagues.id', 5)->first();
-        return $owner->owner_id == $user->id;
+        $leagueId= $team->league_id;
+        $league = new \App\League;
+        $owner_id = $league->where('id', $leagueId)->first()->owner->id;
+ 
+         return $owner_id == $user->id;
     }
 }

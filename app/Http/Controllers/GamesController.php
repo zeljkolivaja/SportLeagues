@@ -21,8 +21,6 @@ class GamesController extends Controller
         $league = $request->input('league');
         $games = $game->showGames($league);
         return view('games.index', compact('games'));
-
-        dd($games);
     }
 
     /**
